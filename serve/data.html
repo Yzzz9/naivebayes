@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+
+<html>
+    
+    <head>
+        <style>
+            .container {
+                display:flex;
+                justify-content:center;
+            }
+            hr {
+                background-color:#F2F2F2;
+            }
+            #tbl {
+                border-collapse:collapse;
+            }
+            #tbl th, #tbl td {
+                text-align:center;
+                border:1px solid #DDDDDD;
+            }
+            #fancy {
+                background-color:#D2D2D2;
+                padding:5px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="container">
+            <table><tr><td>
+                <div class="container">
+                    <table><tr><th>
+                        <div><h1> Bayesian Classifier </h1></div>
+                        <div><h2> {{.Title}} </h2></div>
+                        <hr>
+                        <div><h3> Construct Data </h3></div>
+                    </th></tr></table>
+                </div>
+
+                <form action="/saveData/{{.Title}}" method="POST">
+                
+                <div class="container">
+                    <table id="tbl">
+                        <tr>
+                            {{range .Adata}}
+                                <td id="fancy"> {{.AttrName}} </td>
+                            {{end}}
+                            <td id="fancy">Action</td>
+                        </tr>
+                        {{range $i := .Body}}
+                        <tr>
+                            {{range .}}
+                                <td> {{.}} </td>
+                            {{end}}
+                            <td> 
+                                <button type="submit" name="submit" value="del-$i">Delete</button>
+                            </td>
+                        </tr>
+                        {{end}}
+                        <tr>
+                            {{range .Adata}}
+                                <td>
+                                    <select name="sel-{{.AttrName}}">
+                                    {{range .AttrValues}}
+                                        <option value="{{.}}">{{.}}</option>            
+                                    {{end}}
+                                    </select>
+                                </td>
+                            {{end}}
+                            <td>
+                                <button type="submit" name="submit" value="add">Add</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <br>
+
+                <div class="container">
+                    <div><button type="submit" name="submit" value="done">Done</button></div>
+                    <div><button type="submit" name="submit" value="back">Back</button></div>
+                </div>
+                
+                </form> 
+
+            </td></tr></table>
+        </div>
+    </body>
+
+</html>

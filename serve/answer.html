@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style>
+            .container {
+                display:flex;
+                justify-content:center;
+            }
+            hr {
+                background-color:#F2F2F2;
+            }
+            #tbl {
+                border-collapse:collapse;
+            }
+            #tbl td {
+                text-align:center;
+                border:1px solid #DDDDDD;
+                padding:10px;
+            }
+            #fancy {
+                background-color:#D2D2D2;
+            }
+            #ans {
+                background-color:#F2F2F2;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <table><tr><td>
+                <div class="container">
+                    <table><tr><th>
+                        <div><h1> Bayesian Classifier </h1></div>
+                        <div><h2> {{.Title}} </h2></div>
+                        <hr>
+                        <div><h3>Final Answer</h3></div>
+                    </th></tr></table>
+                </div>
+                
+                <br>
+
+                {{$ans := .Ans}}
+                <div class="container">
+                    <table id="tbl">
+                        <tr>
+                            {{range .Body}}
+                            <td id="fancy"> {{.AttrName}} </td>
+                            {{end}}
+                        </tr>
+                        <tr>
+                            {{range .Query}}
+                                {{if eq . "?"}}
+                                <td id="ans">Answer = {{$ans}}</td>
+                                {{else}}
+                                <td> {{.}} </td>
+                                {{end}}
+                            {{end}}
+                        </tr>
+                    </table>
+                </div>
+            
+                <br>
+
+                <div class="container"><form action="/Query/{{.Title}}"><button type="submit">Back</button></form></div>
+            </td></tr></table>
+        </div>
+    </body>
+
+</html>

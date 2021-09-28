@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <style>
+            .container{
+                display:flex;
+                justify-content:center;
+            }
+            .flr {
+                float:right;
+            }
+            hr {
+                background-color:#F2F2F2;
+            }
+            #tbl{
+                border-collapse:collapse;
+            }
+            #tbl th, #tbl td {
+                border:1px solid #DDDDDD;
+            }
+            #tbl th {
+                background-color:#D2D2D2;
+                padding:5px;
+            }
+            .info {
+                width:5px;
+                height:16px;
+            }
+        </style>
+    </head>
+
+<body>
+
+<div class="container">
+    <table><tr><td>
+        <div class="container">
+            <table><tr><th>
+                <div>
+                <h1>
+                    Bayesian Classifier
+                    <button class="info" title="This classifier helps to predict value of attribute
+                    based on data of values of other attributes">i</button>
+                </h1>
+                </div>
+                <div>
+                    <h2>
+                        {{.Title}}
+                        <button class="info" title="This is name of model, you can switch between models directly in browser">i</button>
+                    </h2>
+                </div>
+                <hr>
+                <div><h3> Construct Attributes </h3></div>
+            </th></tr></table>
+        </div>
+
+        <form action="/saveAttributes/{{.Title}}" method="POST">
+        <div>
+            <table id="tbl">
+                <tr>
+                    <th> 
+                        Attributes
+                        <button class="info" title="Attributes have unique values, data can only be formed with those values">i</button>
+                    </th>
+                    <th> 
+                        Values
+                        <button class="info" title="Each value is unique w.r.t. its attribute">i</button>
+                    </th>
+                </tr>
+                {{$aname := .Attname}}
+                {{$avalue := .Attvalue}}
+                {{range .Body}}
+                <tr>
+                    <td>
+                        {{$attname := .AttrName}} 
+                        {{if eq $attname $aname}}
+                            {{if eq $avalue ""}}
+                            <div class="flr">
+                                <input name="inp-{{$attname}}" value="{{$attname}}">
+                                <button type="submit" value="sav-{{$attname}}" name="submit">Save</button>
+                            </div>
+                            {{else}}
+                            <div class="flr">
+                                {{$attname}}
+                                <button type="submit" value="edt-{{$attname}}" name="submit">Edit</button>
+                                <button type="submit" value="del-{{$attname}}" name="submit">Delete</button>
+                            </div>
+                            {{end}}
+                        {{else}}
+                            <div class="flr">
+                                {{$attname}}
+                                <button type="submit" value="edt-{{$attname}}" name="submit">Edit</button>
+                                <button type="submit" value="del-{{$attname}}" name="submit">Delete</button>
+                            </div>
+                        {{end}}
+                    </td>
+                    <td>
+                        {{range $i, $attvalue := .AttrValues}}
+                        <div> 
+                            {{if eq $attname $aname}}
+                                {{if eq $attvalue $avalue}}
+                                <div class="flr">
+                                    <input name="inp-{{$attname}}-{{$attvalue}}" value="{{$attvalue}}">
+                                    <button type="submit" value="sav-{{$attname}}-{{$attvalue}}" name="submit">Save</button>
+                                </div>
+                                {{else}}
+                                <div class="flr">
+                                    {{.}} 
+                                    <button type="submit" value="edt-{{$attname}}-{{$attvalue}}" name="submit">Edit</button>
+                                    <button type="submit" value="del-{{$attname}}-{{$attvalue}}" name="submit">Delete</button>
+                                </div>
+                                {{end}}
+                            {{else}}
+                            <div class="flr">
+                                {{.}} 
+                                <button type="submit" value="edt-{{$attname}}-{{$attvalue}}" name="submit">Edit</button>
+                                <button type="submit" value="del-{{$attname}}-{{$attvalue}}" name="submit">Delete</button>
+                            </div>
+                            {{end}}
+                        </div>
+                        {{end}}
+                        <div class="flr">
+                            <input type="text" name="inpval-{{$attname}}" placeholder="Enter Value">
+                            <button type="submit" value="add-{{$attname}}" name="submit">Add</button>
+                        </div>
+                    </td>
+                </tr>
+                {{end}}
+                <tr>
+                    <td>
+                        <div class="flr">
+                            <input type="text" name="newatt" placeholder="Enter Attribute">
+                            <button type="submit" value="addatt" name="submit">Add</button> 
+                        </div>
+                    </td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    
+        <br> 
+        
+        <div class="container">
+            <button type="submit" value="done" name="submit">Done</button>
+        </div>
+        </form>
+        
+    </td></tr></table>
+</div>
+</body>
+
+</html>

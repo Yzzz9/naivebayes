@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <style>
+            .container {
+                display:flex;
+                justify-content:center;
+            }
+            hr {
+                background-color:#F2F2F2;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div class="container">
+            <table><tr><th>
+                
+                <div class="container">
+                    <table><tr><th>
+                        <div><h1> Bayesian Classifier </h1></div>
+                        <div><h2> {{.Title}} </h2></div>
+                    </th></tr></table>
+                </div>
+                   
+                <hr><br><br>
+
+                <form action="/Data/{{.Title}}" method="POST">
+ 
+                <div class="container">
+                    <input type="number" name="num" placeholder="Enter Number of Entries">
+                    <button type="submit" name="submit" value="newdata">Create New Data</button>
+                </div>
+                
+                <br>
+                
+                {{if eq .File true}}
+                <div class="container"><button type="submit" name="submit" value="exidata">Load Existing Data</button></div>
+                {{end}}
+                
+                <br>
+
+                <div class="container"><button type="submit" name="submit" value="back">Go Back</button></div>
+        
+                </form>
+
+            </th></tr></table>
+        </div>
+    </body>
+
+</html>
