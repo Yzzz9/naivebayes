@@ -1,0 +1,5 @@
+outlook:sunny,overcast,rainy
+temp:hot,mild,cold
+humidity:high,normal
+windy:true,false
+play:yes,no

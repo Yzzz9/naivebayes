@@ -1,9 +1,9 @@
 package main
 
-import(
-    "naivebayes/serve"
+import (
+	"naivebayes/serve"
 )
 
 func main() {
-    serve.Run()
+	serve.Run()
 }
